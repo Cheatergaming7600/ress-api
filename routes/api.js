@@ -415,7 +415,7 @@ router.get('/short/ssur', async (req, res, next) => {
 	if(apikeyInput != 'CheaterGanteng') return res.json(loghandler.invalidKey)
      if (!url) return res.json(loghandler.noturl)
 
-     request(`https://ssur.cc/api.php?appkey=Ed8nLSFpNVGB&format=text&longurl=${url}`, function (error, response, body) {
+     request(`http://ssur.cc/api.php?appkey=Ed8nLSFpNVGB&format=text&longurl=${url}`, function (error, response, body) {
          try {
              res.json({
                  status : true,
