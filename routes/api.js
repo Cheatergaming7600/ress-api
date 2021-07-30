@@ -414,10 +414,16 @@ router.get('/short/ssur', async (req, res, next) => {
 	if(!apikeyInput) return res.json(loghandler.notparam)
 	if(apikeyInput != 'CheaterGanteng') return res.json(loghandler.invalidKey)
      if (!url) return res.json(loghandler.noturl)
-
-     data = await fetchJson(`http://ssur.cc/api.php?appkey=Ed8nLSFpNVGB&format=text&longurl=${url}`)
-     hasil = `Output : ${data.result}`
-     print (hasil)
+const loadToDosAPI = () => {
+  return fetch('http://ssur.cc/api.php?appkey=Ed8nLSFpNVGB&format=text&longurl=${url}')
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(response.statusText);
+      }
+    });
+}
 
 router.get('/base', async (req, res, next) => {
 	var type = req.query.type,
