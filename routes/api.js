@@ -415,22 +415,9 @@ router.get('/short/ssur', async (req, res, next) => {
 	if(apikeyInput != 'CheaterGanteng') return res.json(loghandler.invalidKey)
      if (!url) return res.json(loghandler.noturl)
 
-     request(`http://ssur.cc/api.php?appkey=Ed8nLSFpNVGB&format=text&longurl=${url}`, function (error, response, body) {
-         try {
-             res.json({
-                 status : true,
-                 creator : `${creator}`,
-                 result : {
-                     link : `${body}`,
-                 },
-                 message : `jangan lupa follow ${creator}`
-             })
-         } catch (e) {
-             console.log('Error :', color(e,'red'))
-             res.json(loghandler.invalidlink)
-         }
-     })
-})
+     data = await fetchJson(`http://ssur.cc/api.php?appkey=Ed8nLSFpNVGB&format=text&longurl=${url}`)
+     hasil = `Output : ${data.result}`
+     print (hasil)
 
 router.get('/base', async (req, res, next) => {
 	var type = req.query.type,
